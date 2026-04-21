@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anushka Khetawat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2C5F8D;
+            --dark-blue: #1E3A5F;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - Split Screen */
+        .hero {
+            height: 100vh;
+            display: flex;
+            margin-top: 0;
+        }
+
+        .hero-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 8%;
+            background: white;
+        }
+
+        .hero-left h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero-left .tagline {
+            font-size: 1.35rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            max-width: 520px;
+            line-height: 1.6;
+        }
+
+        .hero-left .accent {
+            color: var(--primary-blue);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(44, 95, 141, 0.3);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--text-dark);
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-dark);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-right {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-right:hover .hero-image {
+            opacity: 1;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: var(--text-gray);
+            margin: 10px auto;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0%, 100% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 8%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            letter-spacing: -1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-blue);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .education-block {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: white;
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .education-block .school {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .education-block .degree {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+
+        .education-block .honors {
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+            margin-top: 0.4rem;
+            font-weight: 600;
+        }
+
+        .languages {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .languages span {
+            display: inline-block;
+            background: white;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+        }
+
+        /* Journey Section */
+        #journey {
+            background: white;
+        }
+
+        .journey-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .journey-item {
+            margin-bottom: 3rem;
+            padding-left: 3rem;
+            border-left: 3px solid var(--primary-blue);
+            position: relative;
+        }
+
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+        }
+
+        .journey-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .journey-item .dates {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .journey-item .location {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .journey-item p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Additional Leadership Section */
+        #leadership {
+            background: var(--bg-light);
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+        }
+
+        .leadership-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            border-top: 4px solid var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .leadership-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+        }
+
+        .leadership-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .leadership-card .dates {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.5px;
+        }
+
+        .leadership-card .org {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .leadership-card p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1100px;
+        }
+
+        .skills-group h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-blue);
+            display: inline-block;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.75rem;
+        }
+
+        .skills-tags span {
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 0.45rem 1rem;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            border: 1px solid #ddd;
+            transition: all 0.2s ease;
+        }
+
+        .skills-tags span:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* Research Section */
+        #research {
+            background: var(--bg-light);
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .research-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .research-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .research-card .subtitle {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .research-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-card .btn {
+            font-size: 0.9rem;
+            padding: 0.8rem 1.5rem;
+        }
+
+        /* Photography Section */
+        #photography {
+            background: white;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            aspect-ratio: 4/3;
+            background: #1a1a1a;
+            cursor: pointer;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            filter: grayscale(100%);
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 2px solid var(--text-dark);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+            }
+
+            .hero-left, .hero-right {
+                flex: none;
+                width: 100%;
+            }
+
+            .hero-left {
+                height: 60vh;
+                padding: 0 5%;
+            }
+
+            .hero-right {
+                height: 40vh;
+            }
+
+            .hero-left h1 {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-image {
+                margin: 0 auto;
+            }
+
+            section {
+                padding: 5rem 5%;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+                justify-content: center;
+            }
+
+            nav {
+                padding: 1rem 3%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-left h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-left .tagline {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#photography">Photography</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-left">
+            <h1>Anushka<br><span class="accent">Khetawat</span></h1>
+            <p class="tagline">Endlessly curious about people, systems, and the zero-to-one moments where ambiguity meets opportunity.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Let's Chat</a>
+                <a href="#journey" class="btn btn-secondary">My Journey</a>
+            </div>
+            <div class="scroll-indicator">SCROLL</div>
+        </div>
+        <div class="hero-right">
+            <!-- Replace with your B&W film photo -->
+            <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1200&h=1600&fit=crop&q=80" alt="Photography" class="hero-image">
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&q=80" alt="Anushka Khetawat" class="about-image">
+            <div class="about-text">
+                <p>I'm endlessly curious about people—what drives them, what holds them back, and how we can design better solutions.</p>
+
+                <p>Growing up in <span class="highlight">New Delhi</span>, I watched my father build his startup from the ground up. His journey made me fall in love with both startups and the people behind them—the resilience, the uncertainty, the relentless drive to turn an idea into something real.</p>
+
+                <p>That early education in scrappiness took me everywhere. From <span class="highlight">conducting field research with Delhi street vendors</span> (studying permits, credit access, systemic barriers) to designing financial literacy tools for international students, and now into <span class="highlight">early-stage venture capital</span> at Thomson Reuters Ventures.</p>
+
+                <p>The <span class="highlight">zero-to-one phase</span> is where things get interesting—when ambiguity meets opportunity. I move quickly, ask uncomfortable questions early, and relentlessly focus on <span class="highlight">who gets excluded</span> from the systems we're building.</p>
+
+                <p>Energy, empathy, and a healthy dose of scrappiness guide everything I do.</p>
+
+                <div class="education-block">
+                    <div class="school">Barnard College, Columbia University &mdash; graduating May 2026</div>
+                    <div class="degree">B.A. Economics &nbsp;|&nbsp; GPA: 3.89</div>
+                    <div class="honors">Dean's List: Spring '23, Fall '23, Spring '24, Fall '24, Spring '25</div>
+                </div>
+
+                <div class="languages">
+                    <span>Hindi</span>
+                    <span>Urdu</span>
+                    <span>Italian</span>
+                    <span>French</span>
+                    <span>English</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey">
+        <h2 class="section-title">Journey</h2>
+        <div class="journey-timeline">
+
+            <div class="journey-item">
+                <h3>Thomson Reuters Ventures</h3>
+                <div class="dates">June 2025 – Present</div>
+                <div class="location">New York, NY &bull; Investment Analyst Intern</div>
+                <p>Evaluating 50+ startups, writing investment briefs, and leveraging proprietary AI tools to identify cross-border opportunities. I'm learning to spot potential when the full picture isn't clear—assessing founders, markets, and business models to inform high-conviction investment decisions. Also leading content initiatives to connect with younger founders and expand our ecosystem.</p>
+            </div>
+
+            <div class="journey-item">
+                <h3>Prestatech</h3>
+                <div class="dates">Feb 2025 – May 2025</div>
+                <div class="location">Milan, Italy &bull; Business Development Intern</div>
+                <p>Identified new business opportunities in banking and real estate, led client outreach, and managed brand visibility on LinkedIn. Living in Milan taught me how to navigate unfamiliar markets, build relationships across cultures, and communicate value in different contexts.</p>
+            </div>
+
+            <div class="journey-item">
+                <h3>City Light Capital</h3>
+                <div class="dates">Sept 2024 – Dec 2024</div>
+                <div class="location">New York, NY &bull; Impact Intern</div>
+                <p>Developed quantitative metrics to assess ESG impact across 125+ portfolio companies. Designed benchmarking tools and collaborated with the investment team to align outcomes with UN Sustainable Development Goals. This is where I learned that impact isn't just a buzzword—it's measurable, strategic, and essential to building companies that last.</p>
+            </div>
+
+            <div class="journey-item">
+                <h3>Laidlaw Research Scholar</h3>
+                <div class="dates">April 2024 – Sept 2025</div>
+                <div class="location">New Delhi, India &bull; Street Vendor Economy Research</div>
+                <p>Spent a summer in Delhi's streets talking to vendors about permits, credit access, and the invisible barriers keeping them informal. When vendors were hesitant to share financial details, I had to pivot—build trust, observe patterns, and draw conclusions from incomplete data. This taught me how to make decisions with ambiguity, a skill that translates directly to evaluating early-stage companies.</p>
+            </div>
+
+            <div class="journey-item">
+                <h3>Speaking Fellow &amp; TEDx Organizer</h3>
+                <div class="dates">Jan 2024 – Present</div>
+                <div class="location">Barnard College &bull; Community Builder</div>
+                <p>Organized 3 TEDx events with 100+ attendees each, coached 50+ students on public speaking, and led workshops reaching 200+ people. I believe the best ideas die in silence—so I'm obsessed with helping people find their voice and tell their stories with confidence.</p>
+            </div>
+
+            <div class="journey-item">
+                <h3>The Sapna Project</h3>
+                <div class="dates">Sept 2023 – Aug 2025</div>
+                <div class="location">Columbia University &bull; President</div>
+                <p>Built a community celebrating South Asian identity through speaker events, panels, and a curated zine featuring 20+ contributors. Increased attendance by 40% and created space for conversations about culture, entrepreneurship, and belonging.</p>
+            </div>
+
+            <div class="journey-item">
+                <h3>Athena Center for Leadership</h3>
+                <div class="dates">Jan 2023 – Sept 2025</div>
+                <div class="location">Barnard College &bull; Student Advisor</div>
+                <p>Served as a student advisor helping peers navigate leadership development programs, workshops, and mentorship opportunities. Being embedded in Athena's ecosystem deepened my conviction that leadership is learnable—and that the most powerful thing you can do is help someone else believe that too.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Additional Leadership Section -->
+    <section id="leadership">
+        <h2 class="section-title">Additional Leadership</h2>
+        <div class="leadership-grid">
+
+            <div class="leadership-card">
+                <h3>Photographer</h3>
+                <div class="dates">Sept 2022 – Present</div>
+                <div class="org">Ratrock Magazine &bull; Columbia University</div>
+                <p>Documenting campus life and culture through the lens of Ratrock, Columbia's student-run magazine. Photography is where I slow down and notice the details everyone else walks past.</p>
+            </div>
+
+            <div class="leadership-card">
+                <h3>Poetry Society &amp; Blog Creator</h3>
+                <div class="dates">Feb 2021 – May 2022</div>
+                <div class="org">Welham Girls' School</div>
+                <p>Founded a poetry society and launched a school blog that gave students a platform to write honestly about their experiences. Creating space for creative voices—especially quiet ones—has always felt like the most important work I can do.</p>
+            </div>
+
+            <div class="leadership-card">
+                <h3>Cross-Cultural Leadership Program Scholar</h3>
+                <div class="dates">Oct 2020 – March 2021</div>
+                <div class="org">Scholar Cohort</div>
+                <p>Selected for a competitive program bringing together emerging leaders across cultures to build the skills and perspective needed to lead across difference. It's where I first started thinking seriously about what leadership actually means—and who gets to claim it.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+
+            <div class="skills-group">
+                <h3>Languages</h3>
+                <div class="skills-tags">
+                    <span>R</span>
+                    <span>STATA</span>
+                    <span>LaTeX</span>
+                    <span>Hindi</span>
+                    <span>Urdu</span>
+                    <span>Italian</span>
+                    <span>French</span>
+                    <span>English</span>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <h3>Technical</h3>
+                <div class="skills-tags">
+                    <span>Airtable</span>
+                    <span>Excel</span>
+                    <span>Figma</span>
+                    <span>Canva</span>
+                    <span>Adobe Illustrator</span>
+                    <span>Squarespace</span>
+                    <span>WordPress</span>
+                    <span>JASP</span>
+                </div>
+            </div>
+
+            <div class="skills-group">
+                <h3>Certifications</h3>
+                <div class="skills-tags">
+                    <span>Bloomberg Market Concepts</span>
+                    <span>Bloomberg ESG</span>
+                    <span>Bloomberg Finance Fundamentals</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <h2 class="section-title">Research</h2>
+        <div class="research-grid">
+            <div class="research-card">
+                <h3>Delhi's Informal Street Vendor Economy</h3>
+                <div class="subtitle">Laidlaw Scholar Research</div>
+                <p>What happens when 2.5 million people operate in the shadows of the formal economy? I spent a summer in Delhi studying street vendors—their financial patterns, the systemic barriers they face, and the policy gaps that keep them informal. The research led to actionable recommendations for policymakers and a deeper understanding of how credit access shapes livelihoods.</p>
+                <a href="#" class="btn btn-primary">Read Paper</a>
+            </div>
+
+            <div class="research-card">
+                <h3>More Coming Soon</h3>
+                <div class="subtitle">Impact, Informal Economies, Entrepreneurship</div>
+                <p>I'm constantly exploring the intersections of economics, impact investing, and entrepreneurship. More research and writing on the way—stay tuned.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photography Section -->
+    <section id="photography">
+        <h2 class="section-title">Photography</h2>
+        <p style="max-width: 800px; margin: 0 auto 3rem; font-size: 1.15rem; color: var(--text-gray); text-align: center;">
+            Black and white film photography—my way of slowing down and noticing the details. Every frame is intentional, every shot tells a story.
+        </p>
+        <div class="photo-grid">
+            <!-- Replace these with your actual B&W film photos -->
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80" alt="Photo 1">
+            </div>
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=600&q=80" alt="Photo 2">
+            </div>
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=600&q=80" alt="Photo 3">
+            </div>
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600&q=80" alt="Photo 4">
+            </div>
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&q=80" alt="Photo 5">
+            </div>
+            <div class="photo-item">
+                <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&q=80" alt="Photo 6">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-content">
+            <p>Founder, investor, or just obsessed with building better? I'm always up for conversations about impact investing, early-stage ventures, creative projects, or collaboration opportunities.</p>
+            <div class="contact-links">
+                <a href="mailto:ak4899@barnard.edu">Email Me</a>
+                <a href="https://www.linkedin.com/in/anushka-khetawat/" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Anushka Khetawat. Built with energy, empathy, and a healthy dose of scrappiness.</p>
+    </footer>
+
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
