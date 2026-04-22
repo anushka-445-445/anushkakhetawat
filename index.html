@@ -4,1086 +4,746 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anushka Khetawat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary-blue: #2C5F8D;
-            --dark-blue: #1E3A5F;
-            --text-dark: #1a1a1a;
-            --text-gray: #666;
-            --bg-light: #f8f9fa;
+            --cream:  #F7F4EE;
+            --navy:   #1B3D6F;
+            --text:   #1A1A1A;
+            --muted:  #706C68;
+            --rule:   #D0C9BD;
+            --blue:   #2C5F8D;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 300;
+            background: var(--cream);
+            color: var(--text);
             overflow-x: hidden;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Navigation */
+        /* ─── NAV ─── */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1.5rem 5%;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-        }
-
-        nav ul {
-            list-style: none;
+            top: 0; left: 0; width: 100%;
+            z-index: 100;
+            padding: 1.1rem 5%;
             display: flex;
-            justify-content: flex-end;
-            gap: 2.5rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(247,244,238,0.88);
+            backdrop-filter: blur(16px);
         }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
+        .nav-name {
+            font-family: 'Cormorant', serif;
+            font-size: 1.05rem;
             font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
-            position: relative;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            color: var(--text);
         }
 
-        nav a:hover {
-            color: var(--primary-blue);
+        nav ul { list-style: none; display: flex; gap: 2rem; }
+
+        nav ul a {
+            font-size: 0.72rem;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 400;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-blue);
-            transition: width 0.3s ease;
-        }
+        nav ul a:hover { color: var(--navy); }
 
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section - Split Screen */
+        /* ─── HERO ─── */
         .hero {
             height: 100vh;
-            display: flex;
-            margin-top: 0;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
         }
 
         .hero-left {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 0 8%;
-            background: white;
+            justify-content: flex-end;
+            padding: 0 6% 5rem 6%;
+            background: var(--cream);
+        }
+
+        .hero-kicker {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
         }
 
         .hero-left h1 {
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
+            font-family: 'Cormorant', serif;
+            font-size: clamp(4rem, 7vw, 7rem);
+            font-weight: 400;
+            line-height: 0.95;
+            color: var(--text);
         }
 
-        .hero-left .tagline {
-            font-size: 1.35rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            max-width: 520px;
-            line-height: 1.6;
+        .hero-left h1 em {
+            display: block;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--navy);
         }
 
-        .hero-left .accent {
-            color: var(--primary-blue);
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--dark-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(44, 95, 141, 0.3);
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--text-dark);
-            color: var(--text-dark);
-        }
-
-        .btn-secondary:hover {
-            background: var(--text-dark);
-            color: white;
-            transform: translateY(-2px);
+        .hero-sub {
+            margin-top: 2.5rem;
+            font-size: 0.95rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 360px;
         }
 
         .hero-right {
-            flex: 1;
-            position: relative;
             overflow: hidden;
-            background: #1a1a1a;
+            background: #E8E3D9;
         }
 
-        .hero-image {
-            width: 100%;
-            height: 100%;
+        .hero-right img {
+            width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.85;
-            transition: opacity 0.5s ease;
+            object-position: center top;
         }
 
-        .hero-right:hover .hero-image {
-            opacity: 1;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-        }
-
-        .scroll-indicator::after {
-            content: '';
-            display: block;
-            width: 1px;
-            height: 40px;
-            background: var(--text-gray);
-            margin: 10px auto;
-            animation: scroll 2s infinite;
-        }
-
-        @keyframes scroll {
-            0%, 100% { transform: translateY(0); opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Section Styles */
-        section {
-            padding: 8rem 8%;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            letter-spacing: -1px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--primary-blue);
-        }
-
-        /* About Section */
-        #about {
-            background: var(--bg-light);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-        }
-
-        .about-image {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 4px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-
-        .about-text {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text-gray);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text strong {
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .highlight {
-            color: var(--primary-blue);
-            font-weight: 600;
-        }
-
-        .education-block {
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding: 1.25rem 1.5rem;
-            background: white;
-            border-left: 4px solid var(--primary-blue);
-            border-radius: 0 4px 4px 0;
-        }
-
-        .education-block .school {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .education-block .degree {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            margin-top: 0.25rem;
-        }
-
-        .education-block .honors {
-            color: var(--primary-blue);
-            font-size: 0.9rem;
-            margin-top: 0.4rem;
-            font-weight: 600;
-        }
-
-        .languages {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #ddd;
-        }
-
-        .languages span {
-            display: inline-block;
-            background: white;
-            padding: 0.5rem 1rem;
-            margin: 0.5rem 0.5rem 0.5rem 0;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--primary-blue);
-            border: 1px solid var(--primary-blue);
-        }
-
-        /* Journey Section */
-        #journey {
-            background: white;
-        }
-
-        .journey-timeline {
-            max-width: 900px;
+        /* ─── NARRATIVE WRAPPER ─── */
+        .narrative {
+            max-width: 680px;
             margin: 0 auto;
+            padding: 0 5%;
         }
 
-        .journey-item {
-            margin-bottom: 3rem;
-            padding-left: 3rem;
-            border-left: 3px solid var(--primary-blue);
-            position: relative;
+        /* ─── OPENING ─── */
+        .opening {
+            padding: 9rem 5% 6rem;
         }
 
-        .journey-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 0;
-            width: 13px;
-            height: 13px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-        }
-
-        .journey-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
-            color: var(--text-dark);
-        }
-
-        .journey-item .dates {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.5px;
-        }
-
-        .journey-item .location {
-            color: var(--primary-blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
-        }
-
-        .journey-item p {
-            color: var(--text-gray);
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        /* Additional Leadership Section */
-        #leadership {
-            background: var(--bg-light);
-        }
-
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1100px;
-        }
-
-        .leadership-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
-            border-top: 4px solid var(--primary-blue);
-            transition: all 0.3s ease;
-        }
-
-        .leadership-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 14px 35px rgba(0,0,0,0.12);
-        }
-
-        .leadership-card h3 {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 0.3rem;
-        }
-
-        .leadership-card .dates {
-            font-size: 0.82rem;
-            color: var(--text-gray);
-            margin-bottom: 0.6rem;
-            letter-spacing: 0.5px;
-        }
-
-        .leadership-card .org {
-            color: var(--primary-blue);
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .leadership-card p {
-            color: var(--text-gray);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* Skills Section */
-        #skills {
-            background: white;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            max-width: 1100px;
-        }
-
-        .skills-group h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-blue);
-            display: inline-block;
-        }
-
-        .skills-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 0.75rem;
-        }
-
-        .skills-tags span {
-            display: inline-block;
-            background: var(--bg-light);
-            padding: 0.45rem 1rem;
-            border-radius: 20px;
-            font-size: 0.88rem;
-            color: var(--text-dark);
-            border: 1px solid #ddd;
-            transition: all 0.2s ease;
-        }
-
-        .skills-tags span:hover {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
-        }
-
-        /* Research Section */
-        #research {
-            background: var(--bg-light);
-        }
-
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-        }
-
-        .research-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .research-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .research-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .research-card .subtitle {
-            color: var(--primary-blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .research-card p {
-            color: var(--text-gray);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .research-card .btn {
-            font-size: 0.9rem;
-            padding: 0.8rem 1.5rem;
-        }
-
-        /* Photography Section */
-        #photography {
-            background: white;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .photo-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-            aspect-ratio: 4/3;
-            background: #1a1a1a;
-            cursor: pointer;
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-            filter: grayscale(100%);
-        }
-
-        .photo-item:hover img {
-            transform: scale(1.05);
-            opacity: 0.8;
-        }
-
-        /* Contact Section */
-        #contact {
-            background: var(--bg-light);
-            text-align: center;
-        }
-
-        .contact-content {
+        .opening p {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text);
             max-width: 700px;
             margin: 0 auto;
         }
 
-        .contact-content p {
-            font-size: 1.25rem;
-            color: var(--text-gray);
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
+        /* ─── BODY TEXT ─── */
+        .body-text {
+            padding: 0 5% 5rem;
         }
 
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+        .body-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
         }
+
+        .body-text p strong { color: var(--text); font-weight: 500; }
+
+        /* ─── FULL-WIDTH PHOTO BREAK ─── */
+        .photo-break {
+            width: 100%;
+            height: 65vh;
+            overflow: hidden;
+            margin: 4rem 0;
+        }
+
+        .photo-break img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* ─── PULL QUOTE ─── */
+        .pull-quote {
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .pull-quote blockquote {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--navy);
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* ─── CHAPTER LABEL ─── */
+        .chapter {
+            padding: 5rem 5% 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .chapter-label {
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .chapter-rule {
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
+        }
+
+        /* ─── ENTRIES ─── */
+        .entries {
+            padding: 2rem 5% 5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .entry {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 0 3rem;
+            padding: 3.5rem 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .entry:first-child { border-top: none; padding-top: 2rem; }
+
+        .entry-side {
+            padding-top: 0.3rem;
+        }
+
+        .entry-date {
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .entry-loc {
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-top: 0.25rem;
+            line-height: 1.5;
+        }
+
+        .entry-main h3 {
+            font-family: 'Cormorant', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
+        }
+
+        .entry-role {
+            font-size: 0.78rem;
+            color: var(--blue);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .entry-main p {
+            font-size: 0.98rem;
+            line-height: 1.85;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        /* ─── SKILLS STRIP ─── */
+        .skills-strip {
+            padding: 5rem 5% 6rem;
+            border-top: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .skill-col h4 {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--navy);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .skill-col ul { list-style: none; }
+
+        .skill-col li {
+            font-size: 0.88rem;
+            color: var(--muted);
+            font-weight: 300;
+            padding: 0.28rem 0;
+        }
+
+        /* ─── PHOTOGRAPHY ─── */
+        .photo-section {
+            padding: 6rem 0 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .photo-header {
+            padding: 0 5% 3rem;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-header h2 {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .photo-header p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-weight: 300;
+            max-width: 260px;
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+
+        .photo-grid .photo-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: #DDD8CE;
+        }
+
+        .photo-grid .photo-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.35s, transform 0.5s;
+        }
+
+        .photo-grid .photo-item:hover img {
+            opacity: 1;
+            transform: scale(1.04);
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-section {
+            background: var(--navy);
+            padding: 8rem 5%;
+        }
+
+        .contact-kicker {
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(247,244,238,0.4);
+            margin-bottom: 2rem;
+        }
+
+        .contact-headline {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.1;
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .contact-body {
+            font-size: 0.95rem;
+            color: rgba(247,244,238,0.55);
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 420px;
+            margin-bottom: 3rem;
+        }
+
+        .contact-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
 
         .contact-links a {
-            font-size: 1.1rem;
-            color: var(--text-dark);
+            font-size: 0.75rem;
             text-decoration: none;
-            padding: 1rem 2rem;
-            border: 2px solid var(--text-dark);
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            padding: 0.75rem 1.6rem;
+            border: 1px solid rgba(247,244,238,0.2);
+            color: var(--cream);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.2s;
         }
 
         .contact-links a:hover {
-            background: var(--primary-blue);
-            border-color: var(--primary-blue);
-            color: white;
-            transform: translateY(-3px);
+            background: var(--cream);
+            color: var(--navy);
+            border-color: var(--cream);
         }
 
-        /* Footer */
+        /* ─── FOOTER ─── */
         footer {
-            background: var(--text-dark);
-            color: white;
+            background: #111B2A;
             text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
+            padding: 1.4rem;
+            font-size: 0.72rem;
+            color: rgba(247,244,238,0.25);
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .hero {
-                flex-direction: column;
-            }
+        /* ─── SCROLL FADE ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-            .hero-left, .hero-right {
-                flex: none;
-                width: 100%;
-            }
-
-            .hero-left {
-                height: 60vh;
-                padding: 0 5%;
-            }
-
-            .hero-right {
-                height: 40vh;
-            }
-
-            .hero-left h1 {
-                font-size: 3rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .about-image {
-                margin: 0 auto;
-            }
-
-            section {
-                padding: 5rem 5%;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            nav ul {
-                gap: 1.5rem;
-                justify-content: center;
-            }
-
-            nav {
-                padding: 1rem 3%;
-            }
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-left { justify-content: center; padding-top: 8rem; height: 60vh; }
+            .hero-right { height: 40vh; }
+            .entry { grid-template-columns: 1fr; gap: 0.5rem; }
+            .entry-side { display: flex; gap: 1.5rem; align-items: baseline; }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .skills-strip { grid-template-columns: 1fr 1fr; }
+            .photo-header { flex-direction: column; gap: 1rem; }
+            .photo-header p { text-align: left; }
         }
 
         @media (max-width: 600px) {
-            .hero-left h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-left .tagline {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-            }
-
-            .btn {
-                text-align: center;
-            }
+            nav ul { display: none; }
+            .hero-left h1 { font-size: 3.2rem; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-strip { grid-template-columns: 1fr; }
+            .contact-headline { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
+    <!-- NAV -->
     <nav>
+        <a href="#" class="nav-name">Anushka Khetawat</a>
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#journey">Journey</a></li>
-            <li><a href="#leadership">Leadership</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#research">Research</a></li>
+            <li><a href="#work">Work</a></li>
             <li><a href="#photography">Photography</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- HERO -->
     <div class="hero">
         <div class="hero-left">
-            <h1>Anushka<br><span class="accent">Khetawat</span></h1>
-            <p class="tagline">Endlessly curious about people, systems, and the zero-to-one moments where ambiguity meets opportunity.</p>
-            <div class="hero-cta">
-                <a href="#contact" class="btn btn-primary">Let's Chat</a>
-                <a href="#journey" class="btn btn-secondary">My Journey</a>
-            </div>
-            <div class="scroll-indicator">SCROLL</div>
+            <p class="hero-kicker">New Delhi &rarr; New York</p>
+            <h1>Anushka<em>Khetawat</em></h1>
+            <p class="hero-sub">Curious about people, systems, and who gets left out of both.</p>
         </div>
         <div class="hero-right">
-            <!--
-                HERO IMAGE — replace src below with your file
-                File name : images/hero.jpg
-                Dimensions: 1200 × 1600 px  (portrait / tall crop works best)
-                Format    : JPG  (smaller file size, faster load)
-                Best photo: your single strongest B&W film shot —
-                            high contrast, interesting subject, minimal grain noise.
-                            A candid or environmental portrait works beautifully here.
-            -->
-            <img src="images/hero.JPEG" alt="Photography" class="hero-image">
+            <img src="images/hero.JPEG" alt="Anushka Khetawat">
         </div>
     </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">About</h2>
-        <div class="about-content">
-            <!--
-                ABOUT PHOTO — replace src below with your file
-                File name : images/about.jpg
-                Dimensions: 800 × 1000 px  (portrait, 4:5 ratio)
-                Format    : JPG
-                Best photo: a clear, well-lit photo of your face/upper body —
-                            smart-casual, natural smile. Outdoor light or a bright
-                            indoor setting works best. Does NOT need to be B&W.
-            -->
-            <img src="images/about.JPEG" alt="Anushka Khetawat" class="about-image">
-            <div class="about-text">
-                <p>I'm endlessly curious about people—what drives them, what holds them back, and how we can design better solutions.</p>
+    <!-- OPENING STATEMENT -->
+    <div class="opening fade-in">
+        <p>I grew up in New Delhi watching my father build his startup from scratch. The late nights, the pivots, the stubborn belief that you can make something real from nothing. That is the thing that stuck with me.</p>
+    </div>
 
-                <p>Growing up in <span class="highlight">New Delhi</span>, I watched my father build his startup from the ground up. His journey made me fall in love with both startups and the people behind them—the resilience, the uncertainty, the relentless drive to turn an idea into something real.</p>
+    <!-- ABOUT BODY -->
+    <div class="body-text fade-in">
+        <p>I am a senior at <strong>Barnard College, Columbia University</strong>, studying economics and slowly figuring out my version of that same thing. My work has taken me from Delhi's street markets (literally on a plastic stool, talking to vendors about permits and informal credit) to a fintech startup in Milan to early-stage investing in New York. The thread running through all of it: I want to understand how systems work, and who they're quietly leaving out.</p>
+        <p>I also love to shoot black and white film, help my peers feel comfortable in their own voices through public speaking coaching, and used to run a South Asian community at Columbia. I try to show up fully in everything I do, which sometimes means asking the question that makes the room go quiet.</p>
+    </div>
 
-                <p>That early education in scrappiness took me everywhere. From <span class="highlight">conducting field research with Delhi street vendors</span> (studying permits, credit access, systemic barriers) to designing financial literacy tools for international students, and now into <span class="highlight">early-stage venture capital</span> at Thomson Reuters Ventures.</p>
+    <!-- PULL QUOTE -->
+    <div class="pull-quote fade-in">
+        <blockquote>I want to understand how systems work, and who they're quietly leaving out.</blockquote>
+    </div>
 
-                <p>The <span class="highlight">zero-to-one phase</span> is where things get interesting—when ambiguity meets opportunity. I move quickly, ask uncomfortable questions early, and relentlessly focus on <span class="highlight">who gets excluded</span> from the systems we're building.</p>
+    <!-- PHOTO BREAK 1 -->
+    <div class="photo-break fade-in">
+        <img src="images/gallery-20.jpeg" alt="">
+    </div>
 
-                <p>Energy, empathy, and a healthy dose of scrappiness guide everything I do.</p>
+    <!-- WORK CHAPTER -->
+    <div class="chapter fade-in" id="work">
+        <span class="chapter-label">Work</span>
+        <div class="chapter-rule"></div>
+    </div>
 
-                <div class="education-block">
-                    <div class="school">Barnard College, Columbia University &mdash; graduating May 2026</div>
-                    <div class="degree">B.A. Economics &nbsp;|&nbsp; GPA: 3.89</div>
-                    <div class="honors">Dean's List: Spring '23, Fall '23, Spring '24, Fall '24, Spring '25</div>
-                </div>
-
-                <div class="languages">
-                    <span>Hindi</span>
-                    <span>Urdu</span>
-                    <span>Italian</span>
-                    <span>French</span>
-                    <span>English</span>
-                </div>
+    <div class="entries">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">June 2025<br>Present</div>
+                <div class="entry-loc">New York</div>
             </div>
-        </div>
-    </section>
-
-    <!-- Journey Section -->
-    <section id="journey">
-        <h2 class="section-title">Journey</h2>
-        <div class="journey-timeline">
-
-            <div class="journey-item">
+            <div class="entry-main">
                 <h3>Thomson Reuters Ventures</h3>
-                <div class="dates">June 2025 – Present</div>
-                <div class="location">New York, NY &bull; Investment Analyst Intern</div>
-                <p>Evaluating 50+ startups, writing investment briefs, and leveraging proprietary AI tools to identify cross-border opportunities. I'm learning to spot potential when the full picture isn't clear—assessing founders, markets, and business models to inform high-conviction investment decisions. Also leading content initiatives to connect with younger founders and expand our ecosystem.</p>
+                <div class="entry-role">Investment Analyst Intern</div>
+                <p>Right now I am sitting in meetings about companies that mostly do not exist yet, or barely do. I read decks, meet founders, write investment briefs, and try to understand what conviction feels like before the evidence is in. I have evaluated 50+ startups and written 30 briefs. Every day I learn something I did not know the day before.</p>
             </div>
+        </div>
 
-            <div class="journey-item">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Feb 2025<br>May 2025</div>
+                <div class="entry-loc">Milan, Italy</div>
+            </div>
+            <div class="entry-main">
                 <h3>Prestatech</h3>
-                <div class="dates">Feb 2025 – May 2025</div>
-                <div class="location">Milan, Italy &bull; Business Development Intern</div>
-                <p>Identified new business opportunities in banking and real estate, led client outreach, and managed brand visibility on LinkedIn. Living in Milan taught me how to navigate unfamiliar markets, build relationships across cultures, and communicate value in different contexts.</p>
+                <div class="entry-role">Business Development Intern</div>
+                <p>I moved to Milan with a suitcase and some Italian, working at a fintech startup doing things I had never done before. I found clients, ran product demos in a second language, and learned that relationship-building looks different across cultures but the fundamentals are always the same.</p>
             </div>
+        </div>
 
-            <div class="journey-item">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Sept 2024<br>Dec 2024</div>
+                <div class="entry-loc">New York</div>
+            </div>
+            <div class="entry-main">
                 <h3>City Light Capital</h3>
-                <div class="dates">Sept 2024 – Dec 2024</div>
-                <div class="location">New York, NY &bull; Impact Intern</div>
-                <p>Developed quantitative metrics to assess ESG impact across 125+ portfolio companies. Designed benchmarking tools and collaborated with the investment team to align outcomes with UN Sustainable Development Goals. This is where I learned that impact isn't just a buzzword—it's measurable, strategic, and essential to building companies that last.</p>
+                <div class="entry-role">Impact Intern</div>
+                <p>This is where I learned to hold a spreadsheet and a values system in the same hand. I built tools to measure ESG impact across 125+ portfolio companies and came to understand that impact without measurement is just good intentions dressed up as strategy.</p>
             </div>
+        </div>
 
-            <div class="journey-item">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Apr 2024<br>Sept 2025</div>
+                <div class="entry-loc">New Delhi</div>
+            </div>
+            <div class="entry-main">
                 <h3>Laidlaw Research Scholar</h3>
-                <div class="dates">April 2024 – Sept 2025</div>
-                <div class="location">New Delhi, India &bull; Street Vendor Economy Research</div>
-                <p>Spent a summer in Delhi's streets talking to vendors about permits, credit access, and the invisible barriers keeping them informal. When vendors were hesitant to share financial details, I had to pivot—build trust, observe patterns, and draw conclusions from incomplete data. This taught me how to make decisions with ambiguity, a skill that translates directly to evaluating early-stage companies.</p>
+                <div class="entry-role">Research</div>
+                <p>I spent a summer in Delhi sitting with street vendors, asking about money, permits, and what it feels like to operate outside the formal economy. Some days people talked. Some days they did not. The research paper mattered less than the practice of actually listening and learning to make sense of incomplete information.</p>
             </div>
+        </div>
 
-            <div class="journey-item">
-                <h3>Speaking Fellow &amp; TEDx Organizer</h3>
-                <div class="dates">Jan 2024 – Present</div>
-                <div class="location">Barnard College &bull; Community Builder</div>
-                <p>Organized 3 TEDx events with 100+ attendees each, coached 50+ students on public speaking, and led workshops reaching 200+ people. I believe the best ideas die in silence—so I'm obsessed with helping people find their voice and tell their stories with confidence.</p>
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Jan 2024<br>Present</div>
+                <div class="entry-loc">New York</div>
             </div>
+            <div class="entry-main">
+                <h3>Speaking Fellow</h3>
+                <div class="entry-role">Barnard College</div>
+                <p>Three TEDx events. 50+ students coached. 200+ workshops delivered. What I really do is help people find the version of their voice that actually sounds like them, not the version they think they are supposed to have.</p>
+            </div>
+        </div>
 
-            <div class="journey-item">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Sept 2023<br>Dec 2023</div>
+                <div class="entry-loc">Remote</div>
+            </div>
+            <div class="entry-main">
+                <h3>Achieving Women Equity Funds</h3>
+                <div class="entry-role">Intern</div>
+                <p>Managed LinkedIn content strategy and redesigned the website for a fund focused on closing the gender funding gap. Grew engagement by 30% and brought 4% year-over-year growth in site traffic. A small org with real stakes, and a reminder that content strategy is just storytelling with a goal.</p>
+            </div>
+        </div>
+
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Jul 2023<br>Aug 2023</div>
+                <div class="entry-loc">Haryana, India</div>
+            </div>
+            <div class="entry-main">
+                <h3>Athena Education</h3>
+                <div class="entry-role">Growth Intern</div>
+                <p>My first real growth role. I ran social media campaigns across Instagram and X for an edtech startup and grew reach by 19% in two months. I learned that data and creativity are not opposites, they are the same thing in different clothes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTO BREAK 2 -->
+    <div class="photo-break fade-in">
+        <img src="images/gallery-11.jpeg" alt="">
+    </div>
+
+    <!-- COMMUNITY CHAPTER -->
+    <div class="chapter fade-in">
+        <span class="chapter-label">Community</span>
+        <div class="chapter-rule"></div>
+    </div>
+
+    <div class="entries">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Sept 2023<br>Aug 2025</div>
+                <div class="entry-loc">Columbia</div>
+            </div>
+            <div class="entry-main">
                 <h3>The Sapna Project</h3>
-                <div class="dates">Sept 2023 – Aug 2025</div>
-                <div class="location">Columbia University &bull; President</div>
-                <p>Built a community celebrating South Asian identity through speaker events, panels, and a curated zine featuring 20+ contributors. Increased attendance by 40% and created space for conversations about culture, entrepreneurship, and belonging.</p>
+                <div class="entry-role">President</div>
+                <p>I built a community for South Asian students at Columbia who wanted to talk about culture, identity, and entrepreneurship honestly. Speaker events averaging 75+ attendees, a zine featuring 20+ contributors, attendance up 40%. It became the space I wished had existed when I arrived.</p>
             </div>
+        </div>
 
-            <div class="journey-item">
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Sept 2024<br>Dec 2024</div>
+                <div class="entry-loc">New York</div>
+            </div>
+            <div class="entry-main">
                 <h3>Athena Center for Leadership</h3>
-                <div class="dates">Jan 2023 – Sept 2025</div>
-                <div class="location">Barnard College &bull; Student Advisor</div>
-                <p>Served as a student advisor helping peers navigate leadership development programs, workshops, and mentorship opportunities. Being embedded in Athena's ecosystem deepened my conviction that leadership is learnable—and that the most powerful thing you can do is help someone else believe that too.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Additional Leadership Section -->
-    <section id="leadership">
-        <h2 class="section-title">Additional Leadership</h2>
-        <div class="leadership-grid">
-
-            <div class="leadership-card">
-                <h3>Photographer</h3>
-                <div class="dates">Sept 2022 – Present</div>
-                <div class="org">Ratrock Magazine &bull; Columbia University</div>
-                <p>Documenting campus life and culture through the lens of Ratrock, Columbia's student-run magazine. Photography is where I slow down and notice the details everyone else walks past.</p>
-            </div>
-
-            <div class="leadership-card">
-                <h3>Poetry Society &amp; Blog Creator</h3>
-                <div class="dates">Feb 2021 – May 2022</div>
-                <div class="org">Welham Girls' School</div>
-                <p>Founded a poetry society and launched a school blog that gave students a platform to write honestly about their experiences. Creating space for creative voices—especially quiet ones—has always felt like the most important work I can do.</p>
-            </div>
-
-            <div class="leadership-card">
-                <h3>Cross-Cultural Leadership Program Scholar</h3>
-                <div class="dates">Oct 2020 – March 2021</div>
-                <div class="org">Scholar Cohort</div>
-                <p>Selected for a competitive program bringing together emerging leaders across cultures to build the skills and perspective needed to lead across difference. It's where I first started thinking seriously about what leadership actually means—and who gets to claim it.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-grid">
-
-            <div class="skills-group">
-                <h3>Languages</h3>
-                <div class="skills-tags">
-                    <span>R</span>
-                    <span>STATA</span>
-                    <span>LaTeX</span>
-                    <span>Hindi</span>
-                    <span>Urdu</span>
-                    <span>Italian</span>
-                    <span>French</span>
-                    <span>English</span>
-                </div>
-            </div>
-
-            <div class="skills-group">
-                <h3>Technical</h3>
-                <div class="skills-tags">
-                    <span>Airtable</span>
-                    <span>Excel</span>
-                    <span>Figma</span>
-                    <span>Canva</span>
-                    <span>Adobe Illustrator</span>
-                    <span>Squarespace</span>
-                    <span>WordPress</span>
-                    <span>JASP</span>
-                </div>
-            </div>
-
-            <div class="skills-group">
-                <h3>Certifications</h3>
-                <div class="skills-tags">
-                    <span>Bloomberg Market Concepts</span>
-                    <span>Bloomberg ESG</span>
-                    <span>Bloomberg Finance Fundamentals</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Research Section -->
-    <section id="research">
-        <h2 class="section-title">Research</h2>
-        <div class="research-grid">
-            <div class="research-card">
-                <h3>Delhi's Informal Street Vendor Economy</h3>
-                <div class="subtitle">Laidlaw Scholar Research</div>
-                <p>What happens when 2.5 million people operate in the shadows of the formal economy? I spent a summer in Delhi studying street vendors—their financial patterns, the systemic barriers they face, and the policy gaps that keep them informal. The research led to actionable recommendations for policymakers and a deeper understanding of how credit access shapes livelihoods.</p>
-                <a href="#" class="btn btn-primary">Read Paper</a>
-            </div>
-
-            <div class="research-card">
-                <h3>More Coming Soon</h3>
-                <div class="subtitle">Impact, Informal Economies, Entrepreneurship</div>
-                <p>I'm constantly exploring the intersections of economics, impact investing, and entrepreneurship. More research and writing on the way—stay tuned.</p>
+                <div class="entry-role">Athena Fellow, Barnard College</div>
+                <p>Designed financial literacy modules that reached 500+ students and built training programs for peer mentors. Thinking about how to make financial knowledge actually accessible, not just technically available, was the whole challenge.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Photography Section -->
-    <section id="photography">
-        <h2 class="section-title">Photography</h2>
-        <p style="max-width: 800px; margin: 0 auto 3rem; font-size: 1.15rem; color: var(--text-gray); text-align: center;">
-            Black and white film photography—my way of slowing down and noticing the details. Every frame is intentional, every shot tells a story.
-        </p>
-        <!--
-            PHOTOGRAPHY GALLERY
-            File names : images/gallery-01.jpg  through  images/gallery-06.jpg
-                         (add up to gallery-12.jpg if you want more shots)
-            Dimensions : 1200 × 900 px  (landscape, 4:3 ratio)
-            Format     : JPG
-            Best photos: B&W film shots — a mix of subjects works well:
-                         people, streets, architecture, nature, details.
-                         Aim for variety in composition (close-up, wide, mid-shot)
-                         so the grid feels dynamic, not repetitive.
-            To add more photos: copy any <div class="photo-item">...</div>
-            block below and change the filename (gallery-07.jpg, etc.)
-        -->
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Sept 2023<br>Sept 2025</div>
+                <div class="entry-loc">New York</div>
+            </div>
+            <div class="entry-main">
+                <h3>Dean's Office, Barnard College</h3>
+                <div class="entry-role">Peer Tutor</div>
+                <p>Tutored students in introductory economics, covering financial statement analysis and problem-solving. Reviewed 50+ assignments and ran study sessions focused enough that 100% of my tutees hit their target grades.</p>
+            </div>
+        </div>
+
+        <div class="entry fade-in">
+            <div class="entry-side">
+                <div class="entry-date">Sept 2022<br>Sept 2024</div>
+                <div class="entry-loc">Columbia</div>
+            </div>
+            <div class="entry-main">
+                <h3>Ratrock Magazine</h3>
+                <div class="entry-role">Photographer</div>
+                <p>Shooting for Columbia's student magazine. Photography is how I slow down enough to notice what is actually in front of me.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="skills-strip fade-in" id="skills">
+        <div class="skill-col">
+            <h4>Languages</h4>
+            <ul>
+                <li>R</li><li>STATA</li><li>LaTeX</li>
+                <li>Hindi</li><li>Urdu</li><li>Italian</li><li>French</li><li>English</li>
+            </ul>
+        </div>
+        <div class="skill-col">
+            <h4>Technical</h4>
+            <ul>
+                <li>Airtable</li><li>Excel</li><li>Figma</li><li>Canva</li>
+                <li>Adobe Illustrator</li><li>Squarespace</li><li>WordPress</li><li>JASP</li>
+            </ul>
+        </div>
+        <div class="skill-col">
+            <h4>Certifications</h4>
+            <ul>
+                <li>Bloomberg Market Concepts</li>
+                <li>Bloomberg ESG</li>
+                <li>Bloomberg Finance Fundamentals</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PHOTOGRAPHY -->
+    <div class="photo-section" id="photography">
+        <div class="photo-header fade-in">
+            <h2>Black and white film.</h2>
+            <p>Shooting on film is the only place I fully slow down. Every frame costs something.</p>
+        </div>
         <div class="photo-grid">
-            <div class="photo-item">
-                <!-- Photo 1 — strong opener, your favourite shot -->
-                <img src="images/gallery-01.jpeg" alt="Film photo 1">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 2 -->
-                <img src="images/gallery-02.jpeg" alt="Film photo 2">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 3 -->
-                <img src="images/gallery-03.png" alt="Film photo 3">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 4 -->
-                <img src="images/gallery-04.png" alt="Film photo 4">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 5 -->
-                <img src="images/gallery-05.png" alt="Film photo 5">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 6 -->
-                <img src="images/gallery-06.png" alt="Film photo 6">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 7 -->
-                <img src="images/gallery-07.png" alt="Film photo 7">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 8 -->
-                <img src="images/gallery-08.jpeg" alt="Film photo 8">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 9 -->
-                <img src="images/gallery-09.jpeg" alt="Film photo 9">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 10 -->
-                <img src="images/gallery-10.jpeg" alt="Film photo 10">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 11 -->
-                <img src="images/gallery-11.jpeg" alt="Film photo 11">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 12 -->
-                <img src="images/gallery-12.jpeg" alt="Film photo 12">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 13 -->
-                <img src="images/gallery-13.jpeg" alt="Film photo 13">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 14 -->
-                <img src="images/gallery-14.jpeg" alt="Film photo 14">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 15 -->
-                <img src="images/gallery-15.jpeg" alt="Film photo 15">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 16 -->
-                <img src="images/gallery-16.png" alt="Film photo 16">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 17 -->
-                <img src="images/gallery-17.png" alt="Film photo 17">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 18 -->
-                <img src="images/gallery-18.png" alt="Film photo 18">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 19 -->
-                <img src="images/gallery-19.png" alt="Film photo 19">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 20 -->
-                <img src="images/gallery-20.jpeg" alt="Film photo 20">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 21 -->
-                <img src="images/gallery-21.jpeg" alt="Film photo 21">
-            </div>
-            <div class="photo-item">
-                <!-- Photo 22 -->
-                <img src="images/gallery-22.png" alt="Film photo 22">
-            </div>
+            <div class="photo-item"><img src="images/gallery-01.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-02.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-04.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-05.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-06.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-07.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-08.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-09.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-10.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-12.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-13.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-14.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-15.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-16.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-17.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-18.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-19.png" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-20.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-21.jpeg" alt=""></div>
+            <div class="photo-item"><img src="images/gallery-22.png" alt=""></div>
         </div>
-    </section>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="contact-content">
-            <p>Founder, investor, or just obsessed with building better? I'm always up for conversations about impact investing, early-stage ventures, creative projects, or collaboration opportunities.</p>
-            <div class="contact-links">
-                <a href="mailto:ak4899@barnard.edu">Email Me</a>
-                <a href="https://www.linkedin.com/in/anushka-khetawat/" target="_blank">LinkedIn</a>
-                <a href="#" target="_blank">Resume</a>
-            </div>
+    <!-- CONTACT -->
+    <div class="contact-section" id="contact">
+        <p class="contact-kicker">Get in touch</p>
+        <h2 class="contact-headline">Let's talk about something worth building.</h2>
+        <p class="contact-body">If you are building something, investing in something, or just want to have a good conversation, I am always up for it.</p>
+        <div class="contact-links">
+            <a href="mailto:ak4899@barnard.edu">ak4899@barnard.edu</a>
+            <a href="https://www.linkedin.com/in/anushka-khetawat/" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">Resume</a>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Anushka Khetawat. Built with energy, empathy, and a healthy dose of scrappiness.</p>
+        <p>&copy; 2026 Anushka Khetawat</p>
     </footer>
 
-    <!-- JavaScript for Scroll Animations -->
     <script>
-        const sections = document.querySelectorAll('section');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.07 });
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.15
-        });
+        document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
-                }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
             });
         });
     </script>
